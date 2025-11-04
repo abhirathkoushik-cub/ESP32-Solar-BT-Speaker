@@ -1,0 +1,7 @@
+Record=TopLevelDocument|FileName=Block_diagram.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=Block_diagram.SchDoc|FileName=BQ25798_PMIC.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=Block_diagram.SchDoc|FileName=CP2102_USB_UART.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=Block_diagram.SchDoc|FileName=ESP32_SoC.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=Block_diagram.SchDoc|FileName=MAX9857A_audio_amp.SchDoc|SheetNumber=6
+Record=NoMainPathDocument|SourceDocument=Block_diagram.SchDoc|FileName=mech_comp.SchDoc|SheetNumber=7
+Record=NoMainPathDocument|SourceDocument=Block_diagram.SchDoc|FileName=TPS_BUCK_BOOST.SchDoc|SheetNumber=4

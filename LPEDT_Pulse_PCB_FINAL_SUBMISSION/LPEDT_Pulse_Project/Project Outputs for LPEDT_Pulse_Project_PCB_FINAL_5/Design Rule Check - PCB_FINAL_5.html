@@ -1,0 +1,556 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD25\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10/28/2025</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8:38:56 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc" class="file"><acronym title="C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc">C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">72</td></tr>
+</table>
+</td>
+</table><a name="IDJWPNOIWFYKJ5LBGHQKUIM1KPBK0IYRUUVCMOWE4RXHBXJW01HGP"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQVJEQVWRXRJCINZPIKMWSKVQMFE31UUE5ZHJK4HER0J1ATOS0VFE">Clearance Constraint (Gap=4mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWOE1IXC2NJJXGTQ5WDRT0MDDZCCX51IGCWBWAXOR3YQLZQXG0PBL">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSBUI2HE405DLBPXHGRDTJTB3EHRG3W4VSHDBTC0FCAW0VXHYBXK">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5CQL3RXFDZUCNDHHT52YXY5YTDQ5DFDFWKR55GPF2GXQUBZ0EUNH">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZIK5ZHU01XQJCQOL5KJR240BFGM1GI2OMQHHDHPVJIFDSRDOVARL">Width Constraint (Min=6mil) (Max=50mil) (Preferred=6mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNZG3V0YE0LEPIWK2313V02RSXFS2WR5ZMX0BMBI4KXZDKP2301OO">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYVBQUYNW1ANBO0NKLLQ5BMFUNHPTQXFRDH0SKCEMQVTNVA5KESZL">Power Plane Connect Rule(Direct Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (InPolygon AND InNet('NETL2_2_L01_P024'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMQOIMKKL1FKCHEJIWMZEWK2IUC1CPMYQDJAY5VBNW5FYM0KMYA5F">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGB5KGMHBB50LIP4CIVXGY5EIPAGZUYVVND1HLUHZJBQSQ2BTIL">Hole Size Constraint (Min=1mil) (Max=150mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXBUAUUA3505KJGXJDW4OZ5RJXINUL3OMOH0LIHE205UAAGMMOH0L">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZC5KEAP2UECKJNNMDQEWMD0PTF3KX4M20I5CDAKHPBWRQMRDUGL">Minimum Solder Mask Sliver (Gap=4mil) (All),(All)</a></td>
+<td class="column2">51</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFOG2TYBUGDH0BFZGVW20BMLCGI5W2XPWDOFS4FHOT5GWPXT4THWN">Silk To Solder Mask (Clearance=6mil) (IsPad),(All)</a></td>
+<td class="column2">21</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDG2VFOWWI1W03G5YTIKNSOXXKDINB1FPNXUVNEXOWIALRNYVIOBUB">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDLYWXFIWVRHYSJ2DU53LYHEBMMDT43SZTBDKDE1KG5M5CGJ2VXTQM">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQ2GCM4KVYIOXKJSJRDAIWY2YYDMCS22H5VFGH4PUBMKVVDBH3QEC">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">72</td>
+</tr>
+</table><br><a name="IDZC5KEAP2UECKJNNMDQEWMD0PTF3KX4M20I5CDAKHPBWRQMRDUGL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=4mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.379mil|Location2.X=3840.456mil|Location1.Y=1831.054mil|Location2.Y=1838.046mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.379mil|Location2.X=3840.456mil|Location1.Y=1831.054mil|Location2.Y=1838.046mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (1.406mil &lt; 4mil) Between Pad U1-1(2817.795mil,445.055mil) on Top Layer And Pad U1-16(2844.37mil,471.63mil) on Top Layer [Top Solder] Mask Sliver [1.406mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3909.166mil|Location2.X=3916.159mil|Location1.Y=1832.796mil|Location2.Y=1839.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3909.166mil|Location2.X=3916.159mil|Location1.Y=1832.796mil|Location2.Y=1839.873mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (1.406mil &lt; 4mil) Between Pad U1-12(2930mil,445.055mil) on Top Layer And Pad U1-13(2903.425mil,471.63mil) on Top Layer [Top Solder] Mask Sliver [1.406mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.379mil|Location2.X=3840.371mil|Location1.Y=1757.009mil|Location2.Y=1764.086mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.379mil|Location2.X=3840.371mil|Location1.Y=1757.009mil|Location2.Y=1764.086mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (1.406mil &lt; 4mil) Between Pad U1-4(2817.795mil,386mil) on Top Layer And Pad U1-5(2844.37mil,359.425mil) on Top Layer [Top Solder] Mask Sliver [1.406mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3909.166mil|Location2.X=3916.243mil|Location1.Y=1755.267mil|Location2.Y=1762.259mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3909.166mil|Location2.X=3916.243mil|Location1.Y=1755.267mil|Location2.Y=1762.259mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (1.406mil &lt; 4mil) Between Pad U1-8(2903.425mil,359.425mil) on Top Layer And Pad U1-9(2930mil,386mil) on Top Layer [Top Solder] Mask Sliver [1.406mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2039.903mil|Location2.X=2045.153mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2039.903mil|Location2.X=2045.153mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2152.588mil|Location2.Y=2157.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2152.588mil|Location2.Y=2157.838mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2000.533mil|Location2.X=2005.783mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2000.533mil|Location2.X=2005.783mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2093.532mil|Location2.Y=2098.782mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2093.532mil|Location2.Y=2098.782mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2000.533mil|Location2.X=2005.783mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2000.533mil|Location2.X=2005.783mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2054.162mil|Location2.Y=2059.412mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2054.162mil|Location2.Y=2059.412mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2059.588mil|Location2.X=2064.838mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2059.588mil|Location2.X=2064.838mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2039.903mil|Location2.X=2045.153mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2039.903mil|Location2.X=2045.153mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2093.532mil|Location2.Y=2098.782mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2093.532mil|Location2.Y=2098.782mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2132.903mil|Location2.Y=2138.153mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2132.903mil|Location2.Y=2138.153mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2020.217mil|Location2.X=2025.467mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2020.217mil|Location2.X=2025.467mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1980.847mil|Location2.X=1986.097mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1980.847mil|Location2.X=1986.097mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1961.162mil|Location2.X=1966.412mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1961.162mil|Location2.X=1966.412mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2152.588mil|Location2.Y=2157.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2152.588mil|Location2.Y=2157.838mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1961.162mil|Location2.X=1966.412mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1961.162mil|Location2.X=1966.412mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2073.847mil|Location2.Y=2079.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2073.847mil|Location2.Y=2079.097mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2054.162mil|Location2.Y=2059.412mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2054.162mil|Location2.Y=2059.412mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2059.588mil|Location2.X=2064.838mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2059.588mil|Location2.X=2064.838mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1980.847mil|Location2.X=1986.097mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1980.847mil|Location2.X=1986.097mil|Location1.Y=2184.635mil|Location2.Y=2189.885mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2073.847mil|Location2.Y=2079.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2073.847mil|Location2.Y=2079.097mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2020.217mil|Location2.X=2025.467mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2020.217mil|Location2.X=2025.467mil|Location1.Y=1987.824mil|Location2.Y=1993.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2113.218mil|Location2.Y=2118.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2113.218mil|Location2.Y=2118.468mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2132.903mil|Location2.Y=2138.153mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1894.824mil|Location2.X=1900.074mil|Location1.Y=2132.903mil|Location2.Y=2138.153mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2113.218mil|Location2.Y=2118.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.635mil|Location2.X=2096.885mil|Location1.Y=2113.218mil|Location2.Y=2118.468mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.15mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3533.195mil|Location2.Y=3538.445mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3533.195mil|Location2.Y=3538.445mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1658.848mil|Location2.X=1664.098mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1658.848mil|Location2.X=1664.098mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1627.351mil|Location2.X=1632.601mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1627.351mil|Location2.X=1632.601mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3517.447mil|Location2.Y=3522.697mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3517.447mil|Location2.Y=3522.697mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3564.691mil|Location2.Y=3569.941mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3564.691mil|Location2.Y=3569.941mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.351mil|Location2.X=1727.601mil|Location1.Y=3564.691mil|Location2.Y=3569.941mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.351mil|Location2.X=1727.601mil|Location1.Y=3564.691mil|Location2.Y=3569.941mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1690.344mil|Location2.X=1695.594mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1690.344mil|Location2.X=1695.594mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3485.951mil|Location2.Y=3491.201mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3485.951mil|Location2.Y=3491.201mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1611.603mil|Location2.X=1616.853mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1611.603mil|Location2.X=1616.853mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1674.596mil|Location2.X=1679.846mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1674.596mil|Location2.X=1679.846mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.037mil|Location2.X=1577.287mil|Location1.Y=3470.203mil|Location2.Y=3475.453mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.037mil|Location2.X=1577.287mil|Location1.Y=3470.203mil|Location2.Y=3475.453mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3548.943mil|Location2.Y=3554.193mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3548.943mil|Location2.Y=3554.193mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1706.092mil|Location2.X=1711.342mil|Location1.Y=3438.51mil|Location2.Y=3443.76mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1706.092mil|Location2.X=1711.342mil|Location1.Y=3438.51mil|Location2.Y=3443.76mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1745.659mil|Location2.X=1750.909mil|Location1.Y=3470.203mil|Location2.Y=3475.453mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1745.659mil|Location2.X=1750.909mil|Location1.Y=3470.203mil|Location2.Y=3475.453mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3501.699mil|Location2.Y=3506.949mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3501.699mil|Location2.Y=3506.949mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3580.439mil|Location2.Y=3585.689mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1572.745mil|Location2.X=1577.995mil|Location1.Y=3580.439mil|Location2.Y=3585.689mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1745.659mil|Location2.X=1750.909mil|Location1.Y=3485.951mil|Location2.Y=3491.201mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1745.659mil|Location2.X=1750.909mil|Location1.Y=3485.951mil|Location2.Y=3491.201mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1643.1mil|Location2.X=1648.35mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1643.1mil|Location2.X=1648.35mil|Location1.Y=3439.219mil|Location2.Y=3444.469mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.351mil|Location2.X=1727.601mil|Location1.Y=3548.943mil|Location2.Y=3554.193mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.351mil|Location2.X=1727.601mil|Location1.Y=3548.943mil|Location2.Y=3554.193mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.351mil|Location2.X=1727.601mil|Location1.Y=3580.439mil|Location2.Y=3585.689mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.351mil|Location2.X=1727.601mil|Location1.Y=3580.439mil|Location2.Y=3585.689mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.351mil|Location2.X=1727.601mil|Location1.Y=3533.195mil|Location2.Y=3538.445mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.351mil|Location2.X=1727.601mil|Location1.Y=3533.195mil|Location2.Y=3538.445mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1745.659mil|Location2.X=1750.909mil|Location1.Y=3517.447mil|Location2.Y=3522.697mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1745.659mil|Location2.X=1750.909mil|Location1.Y=3517.447mil|Location2.Y=3522.697mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1719.674mil|Location2.X=1724.924mil|Location1.Y=3501.699mil|Location2.Y=3506.949mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1719.674mil|Location2.X=1724.924mil|Location1.Y=3501.699mil|Location2.Y=3506.949mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 4mil) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFOG2TYBUGDH0BFZGVW20BMLCGI5W2XPWDOFS4FHOT5GWPXT4THWN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=6mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1661.863mil|Location2.X=1669.113mil|Location1.Y=1948.58mil|Location2.Y=1955.83mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1661.863mil|Location2.X=1669.113mil|Location1.Y=1948.58mil|Location2.Y=1955.83mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.991mil &lt; 6mil) Between Pad D1-1(644mil,583mil) on Top Layer And Track (669.984mil,570.205mil)(673.921mil,570.205mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.991mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1559.044mil|Location2.X=1566.294mil|Location1.Y=1948.58mil|Location2.Y=1955.83mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1559.044mil|Location2.X=1566.294mil|Location1.Y=1948.58mil|Location2.Y=1955.83mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.992mil &lt; 6mil) Between Pad D1-2(576.283mil,583mil) on Top Layer And Track (554.236mil,570.205mil)(558.173mil,570.205mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1559.044mil|Location2.X=1566.294mil|Location1.Y=1893.462mil|Location2.Y=1900.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1559.044mil|Location2.X=1566.294mil|Location1.Y=1893.462mil|Location2.Y=1900.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.992mil &lt; 6mil) Between Pad D1-3(576.283mil,502.291mil) on Top Layer And Track (554.236mil,515.087mil)(558.173mil,515.087mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1661.863mil|Location2.X=1669.113mil|Location1.Y=1893.462mil|Location2.Y=1900.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1661.863mil|Location2.X=1669.113mil|Location1.Y=1893.462mil|Location2.Y=1900.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.992mil &lt; 6mil) Between Pad D1-4(651.874mil,502.291mil) on Top Layer And Track (669.984mil,515.087mil)(673.921mil,515.087mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1497.5mil|Location2.X=1502.5mil|Location1.Y=2031mil|Location2.Y=2036mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1497.5mil|Location2.X=1502.5mil|Location1.Y=2031mil|Location2.Y=2036mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad F1-1(499mil,689mil) on Top Layer And Track (500mil,328mil)(500mil,889mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1305.005mil|Location2.X=1312.255mil|Location1.Y=3649.002mil|Location2.Y=3656.252mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1305.005mil|Location2.X=1312.255mil|Location1.Y=3649.002mil|Location2.Y=3656.252mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.803mil &lt; 6mil) Between Pad LED1-A(289.976mil,2278.501mil) on Top Layer And Track (315.567mil,2262.753mil)(315.567mil,2294.249mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.803mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.692mil|Location2.X=1337.942mil|Location1.Y=3656.876mil|Location2.Y=3664.126mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.692mil|Location2.X=1337.942mil|Location1.Y=3656.876mil|Location2.Y=3664.126mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.807mil &lt; 6mil) Between Pad LED1-C(352.969mil,2278.501mil) on Top Layer And Track (315.567mil,2262.753mil)(327.378mil,2278.501mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.692mil|Location2.X=1337.942mil|Location1.Y=3656.876mil|Location2.Y=3664.126mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.692mil|Location2.X=1337.942mil|Location1.Y=3656.876mil|Location2.Y=3664.126mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.807mil &lt; 6mil) Between Pad LED1-C(352.969mil,2278.501mil) on Top Layer And Track (315.567mil,2294.249mil)(327.378mil,2278.501mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.643mil|Location2.X=1337.893mil|Location1.Y=3656.876mil|Location2.Y=3664.126mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.643mil|Location2.X=1337.893mil|Location1.Y=3656.876mil|Location2.Y=3664.126mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.906mil &lt; 6mil) Between Pad LED1-C(352.969mil,2278.501mil) on Top Layer And Track (319.504mil,2278.501mil)(327.378mil,2278.501mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3291.501mil|Location2.X=3298.751mil|Location1.Y=3917.028mil|Location2.Y=3924.278mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3291.501mil|Location2.X=3298.751mil|Location1.Y=3917.028mil|Location2.Y=3924.278mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.803mil &lt; 6mil) Between Pad LED2-A(2303mil,2520mil) on Top Layer And Track (2287.252mil,2545.59mil)(2318.748mil,2545.59mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.803mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3299.375mil|Location2.X=3306.625mil|Location1.Y=3942.715mil|Location2.Y=3949.965mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3299.375mil|Location2.X=3306.625mil|Location1.Y=3942.715mil|Location2.Y=3949.965mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.807mil &lt; 6mil) Between Pad LED2-C(2303mil,2582.992mil) on Top Layer And Track (2287.252mil,2545.59mil)(2303mil,2557.401mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3299.375mil|Location2.X=3306.625mil|Location1.Y=3942.666mil|Location2.Y=3949.916mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3299.375mil|Location2.X=3306.625mil|Location1.Y=3942.666mil|Location2.Y=3949.916mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.906mil &lt; 6mil) Between Pad LED2-C(2303mil,2582.992mil) on Top Layer And Track (2303mil,2549.527mil)(2303mil,2557.401mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3299.375mil|Location2.X=3306.625mil|Location1.Y=3942.715mil|Location2.Y=3949.965mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3299.375mil|Location2.X=3306.625mil|Location1.Y=3942.715mil|Location2.Y=3949.965mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.807mil &lt; 6mil) Between Pad LED2-C(2303mil,2582.992mil) on Top Layer And Track (2303mil,2557.401mil)(2318.748mil,2545.59mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3776.721mil|Location2.X=3783.971mil|Location1.Y=3370.501mil|Location2.Y=3377.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3776.721mil|Location2.X=3783.971mil|Location1.Y=3370.501mil|Location2.Y=3377.751mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.803mil &lt; 6mil) Between Pad LED3-A(2799mil,2000mil) on Top Layer And Track (2773.41mil,1984.252mil)(2773.41mil,2015.748mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.803mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.084mil|Location2.X=3758.334mil|Location1.Y=3378.375mil|Location2.Y=3385.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.084mil|Location2.X=3758.334mil|Location1.Y=3378.375mil|Location2.Y=3385.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.906mil &lt; 6mil) Between Pad LED3-C(2736.008mil,2000mil) on Top Layer And Track (2761.599mil,2000mil)(2769.473mil,2000mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.035mil|Location2.X=3758.285mil|Location1.Y=3378.375mil|Location2.Y=3385.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.035mil|Location2.X=3758.285mil|Location1.Y=3378.375mil|Location2.Y=3385.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.807mil &lt; 6mil) Between Pad LED3-C(2736.008mil,2000mil) on Top Layer And Track (2761.599mil,2000mil)(2773.41mil,1984.252mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.035mil|Location2.X=3758.285mil|Location1.Y=3378.375mil|Location2.Y=3385.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.035mil|Location2.X=3758.285mil|Location1.Y=3378.375mil|Location2.Y=3385.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.807mil &lt; 6mil) Between Pad LED3-C(2736.008mil,2000mil) on Top Layer And Track (2761.599mil,2000mil)(2773.41mil,2015.748mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3531.517mil|Location2.X=3538.767mil|Location1.Y=3418.236mil|Location2.Y=3425.486mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3531.517mil|Location2.X=3538.767mil|Location1.Y=3418.236mil|Location2.Y=3425.486mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.279mil &lt; 6mil) Between Pad R16-1(2544mil,2020mil) on Top Layer And Track (2057mil,2047mil)(3138mil,2047mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.279mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2308.5mil|Location2.X=2313.5mil|Location1.Y=3717.745mil|Location2.Y=3722.745mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2308.5mil|Location2.X=2313.5mil|Location1.Y=3717.745mil|Location2.Y=3722.745mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad R34-2(1297.472mil,2355.966mil) on Top Layer And Track (1311mil,1224mil)(1311mil,2758.824mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2310.5mil|Location2.X=2315.5mil|Location1.Y=3717.915mil|Location2.Y=3722.915mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2310.5mil|Location2.X=2315.5mil|Location1.Y=3717.915mil|Location2.Y=3722.915mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad R34-2(1297.472mil,2355.966mil) on Top Layer And Track (1313mil,1763mil)(1313mil,2757mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4002.375mil|Location2.X=4009.625mil|Location1.Y=3432.559mil|Location2.Y=3439.809mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\abhir\Downloads\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_PCB_FINAL_SUBMISSION\LPEDT_Pulse_Project\PCB_FINAL_5.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4002.375mil|Location2.X=4009.625mil|Location1.Y=3432.559mil|Location2.Y=3439.809mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.367mil &lt; 6mil) Between Pad TP1-1(3006mil,2080mil) on Top Layer And Track (2057mil,2047mil)(3138mil,2047mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.367mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
