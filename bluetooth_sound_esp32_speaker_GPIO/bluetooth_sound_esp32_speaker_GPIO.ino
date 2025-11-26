@@ -181,7 +181,9 @@ void avrc_rn_playstatus_callback(esp_avrc_playback_stat_t playback) {
 
 void setup() {
   Serial.begin(115200);
-  Wire.begin();
+  
+  Wire.begin(18, 19); // Using SDA Pin (IO18) and SCL Pin (IO19)
+
   // Configure Internal Pullups for GPIO Pins
   pinMode(PIN_PLAY_PAUSE, INPUT_PULLUP);
   pinMode(PIN_NEXT_VOL, INPUT_PULLUP);
