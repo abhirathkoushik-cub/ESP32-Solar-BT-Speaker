@@ -1,4 +1,5 @@
 #include "max_audio.h"
+#include "power_mngt.h"
 
 const int volumeStep = 5;
 int volume_value = 80; // Volume values can range from 0 to 127
@@ -35,11 +36,13 @@ void avrc_rn_playstatus_callback(esp_avrc_playback_stat_t playback) {
     case ESP_AVRC_PLAYBACK_PLAYING:
       Serial.println("Callback: Playing");
       localPlayingState = true;
+      pm_record_activity(); // Check timer and power state
       break;
     case ESP_AVRC_PLAYBACK_PAUSED:
     case ESP_AVRC_PLAYBACK_STOPPED:
       Serial.println("Callback: Paused/Stopped");
       localPlayingState = false;
+      pm_record_pause(); // Recording Pause Time
       break;
     default:
       break;

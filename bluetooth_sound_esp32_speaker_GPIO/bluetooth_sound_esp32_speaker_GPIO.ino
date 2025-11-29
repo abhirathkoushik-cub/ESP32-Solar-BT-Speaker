@@ -9,6 +9,7 @@ Rev-2 11/26/2025: (Bharath) Added I2C Communication with BQ for Battery Metrics
 #include <Arduino.h>
 #include "bq_i2c_commands.h"
 #include "max_audio.h"
+#include "power_mngt.h"
 
 const unsigned long doubleClickSpeed = 400; // Time in ms to wait for a second click
 
@@ -18,6 +19,17 @@ BluetoothA2DPSink a2dp_sink(out);
 
 void setup() {
   Serial.begin(115200);
+
+  // Check if waking from deep sleep
+  esp_sleep_wakeup_cause_t wakeup = esp_sleep_get_wakeup_cause();
+  if (wakeup == ESP_SLEEP_WAKEUP_EXT0) {
+    Serial.println("Woken from deep sleep!");
+    pm_exit_deep_sleep();
+    delay(100);
+  }
+
+  // Initialize power management
+  pm_init();
   
   Wire.begin(18, 19); // Using SDA Pin (IO18) and SCL Pin (IO19)
   disableBQWatchdog(); // clearing watchdog before ADC engine enable
@@ -61,11 +73,13 @@ void loop() {
       if (localPlayingState) {
         a2dp_sink.pause();
         Serial.println("Button Cmd: PAUSE");
-        localPlayingState = false; 
+        localPlayingState = false;
+        pm_record_pause(); // Recording Pause Time
       } else {
         a2dp_sink.play();
         Serial.println("Button Cmd: PLAY");
         localPlayingState = true;
+        pm_record_activity(); // Check timer and power state
       }
       lastDebounce_17 = millis();
     }
@@ -77,7 +91,8 @@ void loop() {
   if (lastState_23 == HIGH && reading_23 == LOW) {
     if (millis() - lastPressTime_23 > 50) {
       clickCount_23++;
-      lastPressTime_23 = millis(); // Reset timer on every click
+      lastPressTime_23 = millis(); 
+      pm_record_activity();
     }
   }
   lastState_23 = reading_23;
@@ -95,6 +110,7 @@ void loop() {
     }
     // Reset counter
     clickCount_23 = 0;
+    pm_record_activity();
   }
 
   // Read Vol-/Prev Button 
@@ -103,6 +119,7 @@ void loop() {
     if (millis() - lastPressTime_27 > 50) {
       clickCount_27++;
       lastPressTime_27 = millis(); // Reset timer
+      pm_record_activity();
     }
   }
   lastState_27 = reading_27;
@@ -120,6 +137,7 @@ void loop() {
     }
     // Reset counter
     clickCount_27 = 0;
+    pm_record_activity();
   }
 
   // --- Every 30 s: print battery & charging info ---
@@ -127,6 +145,9 @@ void loop() {
     printBQStatus();
     lastBQUpdate = millis();
   }
+
+  // --- Power State Update ---
+  pm_update();  // Check if transition to DEEP_SLEEP is required
   
   delay(10);
 }
