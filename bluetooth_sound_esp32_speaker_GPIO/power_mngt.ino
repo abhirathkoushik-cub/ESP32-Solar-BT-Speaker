@@ -8,7 +8,7 @@ unsigned long pauseStartTime = 0;
 bool isPaused = true;  // Track pause state
 
 // Timeout (in milliseconds)
-const unsigned long DEEP_SLEEP_TIMEOUT = 2 * 60 * 1000;  // 2 min
+const unsigned long DEEP_SLEEP_TIMEOUT = 0.5 * 60 * 1000;  // 2 min
 
 // --- Power Management Functions ---
 

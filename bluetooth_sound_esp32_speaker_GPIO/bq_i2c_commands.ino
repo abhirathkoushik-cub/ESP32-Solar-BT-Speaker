@@ -32,7 +32,7 @@ const char* chargeStateStr[] = {
 };
 
 unsigned long lastBQUpdate = 0;
-const unsigned long BQ_UPDATE_INTERVAL_MS = 30000UL; // Prints on serial terminal every 30sec
+const unsigned long BQ_UPDATE_INTERVAL_MS = 10000UL; // Prints on serial terminal every 30sec
 
 // I2C Write 1 byte to a register
 void writeBQ25798Register(uint8_t reg, uint8_t value) {
