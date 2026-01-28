@@ -1,9 +1,14 @@
 /*
-Author: Abhirath Koushik and Bharath Varma
+Authors: Abhirath Koushik and Bharath Varma
 Brief: Connects to Phone through Bluetooth, play music through audio amplifier. GPIO Buttons on the speaker control play/pause, vol+ etc
 Rev-1 11/25/2025: GPIO button control completed
 Rev-2 11/26/2025: (Bharath) Added I2C Communication with BQ for Battery Metrics
                   (Abhirath) Added Solar voltage and modularized code
+
+Credits:
+  This project utilizes the "ESP32-A2DP" library by Phil Schatzmann 
+  for Bluetooth A2DP audio streaming.
+  Library Link: https://github.com/pschatzmann/ESP32-A2DP              
 */
 
 #include <Arduino.h>
@@ -140,14 +145,14 @@ void loop() {
     pm_record_activity();
   }
 
-  // --- Every 30 s: print battery & charging info ---
+  //--- Every 30 s: print battery & charging info ---
   if (millis() - lastBQUpdate >= BQ_UPDATE_INTERVAL_MS) {
     printBQStatus();
     lastBQUpdate = millis();
   }
 
   // --- Power State Update ---
-  pm_update();  // Check if transition to DEEP_SLEEP is required
+  // pm_update();  // Check if transition to DEEP_SLEEP is required
   
   delay(10);
 }
